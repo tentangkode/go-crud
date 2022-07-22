@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Golang CRUD</title>
+
+    <style>
+        .container {
+            max-width: 550px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h3>Ubah Data Pasien</h3>
+        <a href="/pasien" class="btn btn-sm btn-primary">Lihat Data</a>
+        <hr/>
+
+        {{ if .pesan }}
+            <div class="alert alert-success">
+                {{ .pesan }}
+            </div>
+        {{ end }}
+
+        <form action="/pasien/edit" method="post">
+            <div class="form-group">
+                <label for="">Nama Lengkap</label>
+                <input type="text" name="nama_lengkap" value="{{ .pasien.NamaLengkap }}" class="form-control {{ if .validation.NamaLengkap }} is-invalid {{ end }}">
+                <div class="invalid-feedback">
+                    {{ .validation.NamaLengkap }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">NIK</label>
+                <input type="text" name="nik" value="{{ .pasien.NIK }}" class="form-control {{ if .validation.NIK }} is-invalid {{ end }}">
+                <div class="invalid-feedback">
+                    {{ .validation.NIK }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Jenis Kelamin</label>
+                <select name="jenis_kelamin" class="form-control {{ if .validation.JenisKelamin }} is-invalid {{ end }}">
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option {{ if eq .pasien.JenisKelamin `1` }} selected {{ end }} value="1">Laki-laki</option>
+                    <option {{ if eq .pasien.JenisKelamin `2` }} selected {{ end }} value="2">Perempuan</option>
+                </select>
+                <div class="invalid-feedback">
+                    {{ .validation.JenisKelamin }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Tempat Lahir</label>
+                <input type="text" name="tempat_lahir" value="{{ .pasien.TempatLahir }}" class="form-control {{ if .validation.TempatLahir }} is-invalid {{ end }}">
+                <div class="invalid-feedback">
+                    {{ .validation.TempatLahir }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Tanggal Lahir</label>
+                <input type="date" name="tanggal_lahir" value="{{ .pasien.TanggalLahir }}" class="form-control {{ if .validation.TanggalLahir }} is-invalid {{ end }}">
+                <div class="invalid-feedback">
+                    {{ .validation.TanggalLahir }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Alamat</label>
+                <textarea name="alamat" class="form-control {{ if .validation.Alamat }} is-invalid {{ end }}">{{ .pasien.Alamat }}</textarea>
+                <div class="invalid-feedback">
+                    {{ .validation.Alamat }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">No.HP</label>
+                <input type="text" name="no_hp" value="{{ .pasien.NoHp }}" class="form-control {{ if .validation.NoHp }} is-invalid {{ end }}">
+                <div class="invalid-feedback">
+                    {{ .validation.NoHp }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" name="id" value="{{ .pasien.Id }}">
+                <button class="btn btn-primary btn-block" type="submit">UBAH DATA</button>
+            </div>
+        </form>
+        
+    </div>
+
+</body>
+
+</html>
